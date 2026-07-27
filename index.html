@@ -11,8 +11,22 @@
   <meta property="og:type" content="profile">
   <meta property="og:url" content="https://jfchaney.com/">
   <meta property="og:site_name" content="Jake Chaney">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://jfchaney.com/images/og-jake.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jake Chaney — Builder, Project Manager, Founder of RVA Digital Works">
+  <meta property="profile:first_name" content="Jake">
+  <meta property="profile:last_name" content="Chaney">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jake Chaney | Builder, Project Manager & Founder of RVA Digital Works">
+  <meta name="twitter:description" content="Richmond-based IT project manager and founder of RVA Digital Works.">
+  <meta name="twitter:image" content="https://jfchaney.com/images/og-jake.jpg">
   <meta name="author" content="Jake Chaney">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="geo.region" content="US-VA">
+  <meta name="geo.placename" content="Richmond, Virginia">
+  <meta name="geo.position" content="37.5407;-77.4360">
+  <meta name="ICBM" content="37.5407, -77.4360">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230a0b0d'/%3E%3Ctext x='60' y='80' text-anchor='middle' font-family='Georgia,serif' font-size='60' font-weight='700' fill='%23e0a94e'%3EJ%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,15 +35,41 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Jake Chaney",
-    "alternateName": "Jacob Chaney",
-    "url": "https://jfchaney.com",
-    "jobTitle": "IT Project Manager & Founder, RVA Digital Works",
-    "worksFor": {"@type": "Organization", "name": "RVA Digital Works", "url": "https://rvadigitalworks.com"},
-    "homeLocation": {"@type": "Place", "name": "Richmond, Virginia"},
-    "knowsAbout": ["Project Management", "Web Design", "Local SEO", "Digital Marketing", "IT Systems"],
-    "sameAs": ["https://rvadigitalworks.com", "https://www.linkedin.com/company/rva-digital-works/"]
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://jfchaney.com/#jake",
+        "name": "Jake Chaney",
+        "alternateName": "Jacob Chaney",
+        "url": "https://jfchaney.com",
+        "image": "https://jfchaney.com/images/jake-portrait.jpg",
+        "jobTitle": "IT Project Manager & Founder, RVA Digital Works",
+        "description": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works. He grew up in Highland Springs, overcame substance abuse and homelessness, and has been in recovery since 2009 — going on to start a family, run a local cab company, build a corporate career at Amazon, and become an IT professional.",
+        "worksFor": {"@type": "Organization", "name": "RVA Digital Works", "url": "https://rvadigitalworks.com"},
+        "homeLocation": {"@type": "Place", "name": "Richmond, Virginia"},
+        "address": {"@type": "PostalAddress", "addressLocality": "Richmond", "addressRegion": "VA", "addressCountry": "US"},
+        "knowsAbout": ["Project Management", "IT Systems", "Web Design", "Local SEO", "Digital Marketing", "Recovery", "Small Business"],
+        "sameAs": ["https://rvadigitalworks.com", "https://www.linkedin.com/company/rva-digital-works/"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jfchaney.com/#website",
+        "url": "https://jfchaney.com",
+        "name": "Jake Chaney",
+        "description": "The personal site of Jake Chaney — IT project manager and founder of RVA Digital Works in Richmond, Virginia.",
+        "author": {"@id": "https://jfchaney.com/#jake"},
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jfchaney.com/#faq",
+        "mainEntity": [
+          {"@type": "Question", "name": "Who is Jake Chaney?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works, a web design and local SEO business. He grew up in Highland Springs, has been in recovery since 2009, and built a career spanning a local cab company, a corporate role at Amazon, and IT."}},
+          {"@type": "Question", "name": "What does Jake Chaney do?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney works as an IT project manager and is the founder of RVA Digital Works, where he builds websites, local SEO, and AI-search visibility for small businesses in the Richmond, Virginia area."}},
+          {"@type": "Question", "name": "Where is Jake Chaney based?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney is based in Richmond, Virginia, and grew up in Highland Springs."}}
+        ]
+      }
+    ]
   }
   </script>
   <style>
