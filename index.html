@@ -102,6 +102,14 @@
     .section-head { max-width: 700px; margin-bottom: 48px; }
     .section-head h2 { font-size: clamp(2rem, 4.4vw, 3rem); }
 
+    .story-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 52px; align-items: start; }
+    .story-media { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 16px; }
+    .photo { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line-2); box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+    .photo::after { content: ""; position: absolute; inset: 0; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05); pointer-events: none; }
+    .photo img { width: 100%; display: block; aspect-ratio: 1/1; object-fit: cover; filter: saturate(1.02) contrast(1.02); }
+    .photo-sm { width: 58%; margin-left: auto; margin-top: -46px; border-width: 2px; border-color: rgba(224,169,78,0.35); }
+    .photo-sm img { aspect-ratio: 4/3; }
+    .photo-cap { color: var(--faint); font-family: 'JetBrains Mono', monospace; font-size: .72rem; letter-spacing: .04em; text-align: right; margin-top: 4px; }
     .prose { max-width: 700px; }
     .prose p { color: var(--muted); font-size: 1.09rem; margin-bottom: 22px; }
     .prose p.lead-line { color: var(--ink); font-size: 1.5rem; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 30px; }
@@ -144,6 +152,11 @@
     @media (max-width: 800px) {
       .nav-links a:not(.btn) { display: none; }
       .now-grid { grid-template-columns: 1fr; }
+      .story-grid { grid-template-columns: 1fr; gap: 34px; }
+      .story-media { position: static; flex-direction: row; align-items: flex-start; }
+      .photo { flex: 1; }
+      .photo-sm { margin-top: 0; }
+      .photo-cap { display: none; }
       header { padding: 84px 0 68px; }
       section { padding: 70px 0; }
       .hero-meta { grid-template-columns: 1fr; gap: 20px; }
@@ -202,12 +215,23 @@
       <div class="kicker">The Story</div>
       <h2>The long way here</h2>
     </div>
-    <div class="prose reveal">
-      <p class="lead-line">Some people go straight from A to B. I took the scenic route — and it taught me more than any straight line ever could.</p>
-      <p>There was a stretch of my life where things came apart. I'm not going to dress it up: I made mistakes, I lost ground, and I had to do the slow, unglamorous work of rebuilding — one honest day at a time. What I learned in those years is the thing I'm proudest of. <strong>You can change. It's hard, it's daily, and it's absolutely possible.</strong></p>
-      <p>That season gave me the tools I use in everything now: showing up when it's uncomfortable, being honest about where things actually stand, asking for help before problems get big, and keeping promises small enough to keep. It turns out those are the same skills that make someone good at managing projects — and good at earning back trust.</p>
-      <p>Today I get to put that to work. I manage IT projects for a living, I taught myself to code, and I started a business helping local Richmond companies get found online. I still show up early, still write things down, and still believe the best thing you can build is a reputation for doing what you said you'd do.</p>
-      <p><em style="color: var(--faint);">[Jake — this is a starting draft in your voice; edit freely. Nothing here names any program or gets specific about anything you'd rather keep private.]</em></p>
+    <div class="story-grid">
+      <div class="prose reveal">
+        <p class="lead-line">Some people go straight from A to B. I took the scenic route — and it taught me more than any straight line ever could.</p>
+        <p>I grew up in Highland Springs, in a blue-collar corner of Richmond where money was tight and nobody handed you anything. By my twenties I'd lost my footing to substance abuse — I spent time homeless, and I did real damage before I found my way out. <strong>In 2009 I got clean, and I've stayed that way ever since.</strong> It's the hardest thing I've ever done and the thing I'm proudest of.</p>
+        <p>What came next, I built one honest day at a time. I started a family. I ran a local Richmond cab company — long hours, real customers, learning a business from the inside. From there I worked my way into a corporate role at Amazon, and from there into the career I have now, as an IT professional.</p>
+        <p>None of it was luck. It was the same handful of habits, applied over and over: show up when it's uncomfortable, tell the truth about where things actually stand, ask for help before problems get big, and keep promises small enough to keep. Those are the skills that rebuild a life — and, it turns out, the same ones that make someone good at managing projects and earning back trust.</p>
+        <p>Today I get to put all of it to work. I manage IT projects for a living, I taught myself to code, and I started RVA Digital Works to help local Richmond businesses get found online. I still show up early, still write things down, and still believe the best thing you can build is a reputation for doing what you said you'd do.</p>
+      </div>
+      <div class="story-media reveal">
+        <figure class="photo">
+          <img src="/images/jake-portrait.jpg" alt="Jake Chaney" loading="lazy">
+        </figure>
+        <figure class="photo photo-sm">
+          <img src="/images/jake-horse.jpg" alt="Jake Chaney riding" loading="lazy">
+        </figure>
+        <p class="photo-cap">Richmond, Virginia &middot; still here, still grateful</p>
+      </div>
     </div>
   </div>
 </section>
