@@ -1,0 +1,18 @@
+# RVA Digital Works — standard static-site .gitignore.
+# Deploys to Vercel as static files: every committed file is publicly reachable.
+# Documents and internal deliverables must not deploy.
+*.md
+*.pdf
+*.docx
+*.xlsx
+*.csv
+proposals/
+brand/social/
+
+# Dependencies / build noise
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*~
