@@ -24,7 +24,7 @@
   <meta name="author" content="Jake Chaney">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="article:published_time" content="2026-07-27">
-  <meta property="article:modified_time" content="2026-07-27">
+  <meta property="article:modified_time" content="2026-08-26">
   <meta name="geo.region" content="US-VA">
   <meta name="geo.placename" content="Richmond, Virginia">
   <meta name="geo.position" content="37.5407;-77.4360">
@@ -47,11 +47,11 @@
         "url": "https://jfchaney.com",
         "image": "https://jfchaney.com/images/jake-portrait.jpg",
         "jobTitle": "IT Project Manager & Founder, RVA Digital Works",
-        "description": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works. He grew up in Highland Springs, overcame substance abuse and homelessness, and has been in recovery since 2009 — going on to start a family, run a local cab company, build a corporate career at Amazon, and become an IT professional.",
+        "description": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works. He grew up in Highland Springs, overcame substance abuse and homelessness, and has been in recovery since 2009 — going on to start a family, run a local cab company, and climb at Amazon from the warehouse floor to a corporate role in Seattle and labor-planning analytics — later building data automation at Deltek before becoming an IT professional and founding RVA Digital Works.",
         "worksFor": {"@type": "Organization", "name": "RVA Digital Works", "url": "https://rvadigitalworks.com"},
         "homeLocation": {"@type": "Place", "name": "Richmond, Virginia"},
         "address": {"@type": "PostalAddress", "addressLocality": "Richmond", "addressRegion": "VA", "addressCountry": "US"},
-        "knowsAbout": ["Project Management", "IT Systems", "Web Design", "Local SEO", "Digital Marketing", "Recovery", "Small Business"],
+        "knowsAbout": ["Project Management", "IT Systems", "Web Design", "Local SEO", "Digital Marketing", "Labor Planning", "Business Analytics", "Data Automation", "Logistics", "Operations", "Recovery", "Small Business"],
         "sameAs": ["https://rvadigitalworks.com", "https://www.linkedin.com/company/rva-digital-works/"]
       },
       {
@@ -71,14 +71,14 @@
         "isPartOf": {"@id": "https://jfchaney.com/#website"},
         "about": {"@id": "https://jfchaney.com/#jake"},
         "datePublished": "2026-07-27",
-        "dateModified": "2026-07-27",
+        "dateModified": "2026-08-26",
         "inLanguage": "en-US"
       },
       {
         "@type": "FAQPage",
         "@id": "https://jfchaney.com/#faq",
         "mainEntity": [
-          {"@type": "Question", "name": "Who is Jake Chaney?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works. He grew up in Highland Springs, came through addiction and homelessness into recovery in 2009, and built a career from there — starting a family, running a local Richmond cab company, moving into a corporate role at Amazon, and landing in IT."}},
+          {"@type": "Question", "name": "Who is Jake Chaney?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney is a Richmond, Virginia IT project manager and the founder of RVA Digital Works. He grew up in Highland Springs, came through addiction and homelessness into recovery in 2009, and built a career from there — starting a family, running a local Richmond cab company, climbing at Amazon from the warehouse floor to a corporate role in Seattle and labor-planning analytics, building data automation at Deltek, and landing in IT."}},
           {"@type": "Question", "name": "What is RVA Digital Works?", "acceptedAnswer": {"@type": "Answer", "text": "RVA Digital Works is Jake Chaney's business. It builds websites, local SEO, and AI-search visibility for small businesses across the Richmond, Virginia area, helping local companies get found on Google and trusted by visitors."}},
           {"@type": "Question", "name": "What does Jake Chaney do as an IT project manager?", "acceptedAnswer": {"@type": "Answer", "text": "As an IT project manager, Jake Chaney keeps complex technical projects moving — coordinating the people, systems, and deadlines so the right things happen in the right order. It is equal parts organization, clear communication, and staying calm under pressure."}},
           {"@type": "Question", "name": "Where is Jake Chaney based, and who does he work with?", "acceptedAnswer": {"@type": "Answer", "text": "Jake Chaney is based in Richmond, Virginia. Through RVA Digital Works he works with small businesses across Richmond, Henrico, Chesterfield, Midlothian, and the surrounding area."}},
@@ -216,8 +216,29 @@
     html.js .reveal { opacity: 0; transform: translateY(30px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
     html.js .reveal.visible, .reveal.visible { opacity: 1; transform: none; }
 
+    /* ---------- Scroll progress ---------- */
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 80; background: linear-gradient(90deg, var(--copper), var(--gold), var(--violet)); box-shadow: 0 0 12px rgba(224,169,78,0.5); }
+
+    /* ---------- Experience timeline ---------- */
+    .timeline { position: relative; margin-top: 26px; }
+    .tl-rail { position: absolute; left: 22px; top: 6px; bottom: 6px; width: 2px; background: var(--line-2); overflow: hidden; border-radius: 2px; }
+    .tl-fill { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: linear-gradient(180deg, var(--gold), var(--copper) 45%, var(--violet)); box-shadow: 0 0 14px rgba(224,169,78,0.5); transition: height .18s ease-out; }
+    .tl-item { position: relative; padding: 0 0 40px 62px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-node { position: absolute; left: 14px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-2); border: 2px solid var(--copper); box-shadow: 0 0 0 4px rgba(224,169,78,0.07); transition: box-shadow .55s ease, transform .55s ease, background .55s ease; }
+    .tl-item.visible .tl-node { background: var(--gold); box-shadow: 0 0 18px rgba(242,205,127,0.7), 0 0 0 5px rgba(224,169,78,0.12); transform: scale(1.08); }
+    .tl-era { font-family: 'JetBrains Mono', monospace; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--copper); margin-bottom: 8px; }
+    .tl-card { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px 26px; backdrop-filter: blur(6px); transition: border-color .3s ease, transform .25s ease; will-change: transform; }
+    .tl-card:hover { border-color: var(--line-2); }
+    .tl-co { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 1.3rem; color: var(--ink); letter-spacing: -0.01em; }
+    .tl-role { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .73rem; letter-spacing: .08em; text-transform: uppercase; margin: 5px 0 13px; }
+    .tl-desc { color: var(--muted); font-size: 1.02rem; }
+    .tl-tag { display: inline-block; margin-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: .67rem; letter-spacing: .05em; color: var(--faint); border: 1px solid var(--line); border-radius: 100px; padding: 5px 12px; }
+
     @media (max-width: 800px) {
       .nav-links a:not(.btn) { display: none; }
+      .tl-item { padding-left: 54px; }
+      .tl-card { padding: 20px 20px; }
       .now-grid { grid-template-columns: 1fr; }
       .story-grid { grid-template-columns: 1fr; gap: 34px; }
       .story-media { position: static; }
@@ -236,6 +257,8 @@
 </head>
 <body>
 
+<div class="scroll-progress" id="sprog" aria-hidden="true"></div>
+
 <div class="bg-fx" aria-hidden="true">
   <div class="aurora a1"></div>
   <div class="aurora a2"></div>
@@ -250,6 +273,7 @@
     <a class="brand" href="#top"><span class="mono-badge">J</span><b>Jake Chaney</b></a>
     <div class="nav-links">
       <a href="#story">Story</a>
+      <a href="#experience">Experience</a>
       <a href="#now">What I Do</a>
       <a href="#contact" class="btn btn-solid magnetic">Get in Touch</a>
     </div>
@@ -284,7 +308,7 @@
       <div class="prose reveal">
         <p class="lead-line">Some people go straight from A to B. I took the scenic route — and it taught me more than any straight line ever could.</p>
         <p>I grew up in Highland Springs, in a blue-collar corner of Richmond where money was tight and nobody handed you anything. By my twenties I'd lost my footing to substance abuse — I spent time homeless, and I did real damage before I found my way out. <strong>In 2009 I got clean, and I've stayed that way ever since.</strong> It's the hardest thing I've ever done and the thing I'm proudest of.</p>
-        <p>What came next, I built one honest day at a time. I started a family. I ran a local Richmond cab company — long hours, real customers, learning a business from the inside. From there I worked my way into a corporate role at Amazon, and from there into the career I have now, as an IT professional.</p>
+        <p>What came next, I built one honest day at a time. I started a family. I ran a local Richmond cab company — long hours, real customers, learning a business from the inside. From there I climbed at Amazon — off the warehouse floor to a corporate role in Seattle, then into labor-planning analytics for the fulfillment network — built data automation at Deltek, and landed in the IT and building work I do now. The short version of that climb is just below.</p>
         <p>None of it was luck. It was the same handful of habits, applied over and over: show up when it's uncomfortable, tell the truth about where things actually stand, ask for help before problems get big, and keep promises small enough to keep. Those are the skills that rebuild a life — and, it turns out, the same ones that make someone good at managing projects and earning back trust.</p>
         <p>Today I get to put all of it to work. I manage IT projects for a living, I taught myself to code, and I started RVA Digital Works to help local Richmond businesses get found online. I still show up early, still write things down, and still believe the best thing you can build is a reputation for doing what you said you'd do.</p>
       </div>
@@ -302,6 +326,71 @@
         </div>
         <p class="photo-cap">Richmond, Virginia &middot; still here, still grateful</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker">Experience</div>
+      <h2>From the warehouse floor to corporate — and out on my own</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-rail"><div class="tl-fill" id="tlFill"></div></div>
+
+      <div class="tl-item reveal">
+        <span class="tl-node"></span>
+        <div class="tl-era">Amazon &middot; Where it started</div>
+        <div class="tl-card">
+          <div class="tl-co">Warehouse Associate</div>
+          <div class="tl-role">Amazon &middot; Fulfillment Floor</div>
+          <p class="tl-desc">I started on the floor of an Amazon fulfillment center — picking, packing, and learning firsthand how the largest logistics operation on earth actually moves, one tote at a time.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-node"></span>
+        <div class="tl-era">Amazon &middot; Seattle Corporate</div>
+        <div class="tl-card">
+          <div class="tl-co">Outbound Flow Lead</div>
+          <div class="tl-role">Amazon HQ &middot; Seattle, WA</div>
+          <p class="tl-desc">I earned my way off the floor and into Amazon's Seattle corporate office as an Outbound Flow Lead — owning the timing and sequencing that keeps packages leaving the building on schedule at enormous scale.</p>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-node"></span>
+        <div class="tl-era">Amazon &middot; Labor Planning</div>
+        <div class="tl-card">
+          <div class="tl-co">Senior Business Analyst, Labor Planning</div>
+          <div class="tl-role">Consulting to Regional Managers &middot; North American Fulfillment Centers</div>
+          <p class="tl-desc">I moved into labor planning as a Senior Business Analyst, advising Regional Managers across Amazon's North American fulfillment network — turning workforce data into staffing plans that balanced cost, capacity, and service across dozens of sites.</p>
+          <span class="tl-tag">labor planning &middot; workforce analytics</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-node"></span>
+        <div class="tl-era">Deltek &middot; GovWin</div>
+        <div class="tl-card">
+          <div class="tl-co">Senior Research Analyst</div>
+          <div class="tl-role">Deltek &middot; Automation for GovWin</div>
+          <p class="tl-desc">At Deltek I built automation that fed the data pipeline behind GovWin, their government-contracting intelligence platform — replacing manual research with code that collected, cleaned, and delivered data at scale. It's where analyst met engineer.</p>
+          <span class="tl-tag">automation &middot; data pipeline &middot; GovWin</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <span class="tl-node"></span>
+        <div class="tl-era">Today &middot; Richmond, VA</div>
+        <div class="tl-card">
+          <div class="tl-co">IT Project Manager &amp; Founder, RVA Digital Works</div>
+          <div class="tl-role">Now</div>
+          <p class="tl-desc">Today I manage IT projects by day and run RVA Digital Works on my own time — custom websites, local SEO, and AI-search visibility for Richmond small businesses. Same habits that carried me up the ladder, pointed at my own thing.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -374,7 +463,7 @@
     <div class="faq-list reveal">
       <div class="faq-item">
         <h3>Who is Jake Chaney?</h3>
-        <p>I'm a Richmond, Virginia IT project manager and the founder of RVA Digital Works. I grew up in Highland Springs, came through addiction and homelessness into recovery in 2009, and built a career from there — starting a family, running a local Richmond cab company, moving into a corporate role at Amazon, and landing in IT. This site is the short version of that story.</p>
+        <p>I'm a Richmond, Virginia IT project manager and the founder of RVA Digital Works. I grew up in Highland Springs, came through addiction and homelessness into recovery in 2009, and built a career from there — starting a family, running a local Richmond cab company, climbing at Amazon from the warehouse floor to a corporate role in Seattle and labor-planning analytics, building data automation at Deltek, and landing in IT. This site is the short version of that story.</p>
       </div>
       <div class="faq-item">
         <h3>What is RVA Digital Works?</h3>
@@ -413,7 +502,7 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <div>© 2026 JAKE CHANEY · RICHMOND, VIRGINIA · UPDATED <time datetime="2026-07-27">JUL 2026</time></div>
+    <div>© 2026 JAKE CHANEY · RICHMOND, VIRGINIA · UPDATED <time datetime="2026-08-26">AUG 2026</time></div>
     <div><a href="mailto:jake@rvadigitalworks.com">EMAIL</a> · <a href="https://rvadigitalworks.com" target="_blank" rel="noopener">RVA DIGITAL WORKS</a></div>
   </div>
 </footer>
@@ -504,6 +593,51 @@
   size();
   window.addEventListener('resize', size);
   tick();
+})();
+
+/* ---- Scroll progress bar ---- */
+(function () {
+  var bar = document.getElementById('sprog');
+  if (!bar) return;
+  function upd() {
+    var d = document.documentElement;
+    var max = d.scrollHeight - d.clientHeight;
+    bar.style.width = (max > 0 ? (d.scrollTop / max) * 100 : 0) + '%';
+  }
+  upd();
+  window.addEventListener('scroll', upd, { passive: true });
+  window.addEventListener('resize', upd);
+})();
+
+/* ---- Timeline rail fills as you scroll through it ---- */
+(function () {
+  var sec = document.getElementById('experience');
+  var fill = document.getElementById('tlFill');
+  if (!sec || !fill) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { fill.style.height = '100%'; return; }
+  function upd() {
+    var r = sec.getBoundingClientRect();
+    var prog = (window.innerHeight * 0.55 - r.top) / r.height;
+    prog = Math.max(0, Math.min(1, prog));
+    fill.style.height = (prog * 100) + '%';
+  }
+  upd();
+  window.addEventListener('scroll', upd, { passive: true });
+  window.addEventListener('resize', upd);
+})();
+
+/* ---- Subtle 3D tilt on cards ---- */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.card, .tl-card').forEach(function (c) {
+    c.addEventListener('mousemove', function (e) {
+      var r = c.getBoundingClientRect();
+      var x = (e.clientX - r.left) / r.width - 0.5;
+      var y = (e.clientY - r.top) / r.height - 0.5;
+      c.style.transform = 'perspective(820px) rotateX(' + (-y * 4) + 'deg) rotateY(' + (x * 5) + 'deg) translateY(-3px)';
+    });
+    c.addEventListener('mouseleave', function () { c.style.transform = ''; });
+  });
 })();
 </script>
 
