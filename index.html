@@ -24,7 +24,7 @@
   <meta name="author" content="Jake Chaney">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="article:published_time" content="2026-07-27">
-  <meta property="article:modified_time" content="2026-08-26">
+  <meta property="article:modified_time" content="2026-10-14">
   <meta name="geo.region" content="US-VA">
   <meta name="geo.placename" content="Richmond, Virginia">
   <meta name="geo.position" content="37.5407;-77.4360">
@@ -34,6 +34,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js');</script>
+  <script type="importmap">{ "imports": { "three": "/js/vendor/three-0.169.0/three.module.min.js" } }</script>
+  <link rel="modulepreload" href="/js/vendor/three-0.169.0/three.module.min.js">
+  <link rel="modulepreload" href="/js/hero3d.js">
   <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
   <script type="application/ld+json">
@@ -72,7 +75,7 @@
         "isPartOf": {"@id": "https://jfchaney.com/#website"},
         "about": {"@id": "https://jfchaney.com/#jake"},
         "datePublished": "2026-07-27",
-        "dateModified": "2026-08-26",
+        "dateModified": "2026-10-14",
         "inLanguage": "en-US"
       },
       {
@@ -144,7 +147,7 @@
     .eyebrow { display: inline-flex; align-items: center; gap: 12px; color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: .74rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 32px; padding: 7px 14px 7px 12px; border: 1px solid var(--line-2); border-radius: 100px; background: rgba(224,169,78,0.05); }
     .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 12px var(--gold); animation: pulse 2.4s ease-in-out infinite; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
-    h1 { font-family: 'Sora', sans-serif; font-size: clamp(2.7rem, 6.8vw, 5rem); max-width: 900px; font-weight: 800; letter-spacing: -0.035em; }
+    h1 { font-family: 'Sora', sans-serif; font-size: clamp(2.7rem, 6.8vw, 5rem); max-width: 900px; font-weight: 800; letter-spacing: -0.035em; text-wrap: balance; }
     h1 .grad { background: linear-gradient(100deg, var(--gold) 0%, var(--copper) 30%, var(--violet) 70%, var(--gold) 100%); background-size: 250% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 7s linear infinite; }
     @keyframes shimmer { to { background-position: 250% center; } }
     .lede { color: var(--muted); font-size: 1.24rem; max-width: 610px; margin: 32px 0 44px; }
@@ -257,6 +260,51 @@
     .hs-cursor { color: var(--gold); animation: blink 1.1s steps(1) infinite; }
     @keyframes blink { 50% { opacity: 0; } }
 
+
+    /* ---------- Hero 3D stage ---------- */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .hero-wrap { position: relative; }
+    .hero-copy, .hero-meta { position: relative; z-index: 3; }
+    .hero-stage { position: relative; z-index: 1; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+    .hero-stage.is-dragging { cursor: grabbing; }
+    .hero-stage::before { content: ""; position: absolute; left: 50%; top: 45%; width: min(62%, 440px); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle, rgba(224,169,78,0.2), rgba(138,111,214,0.08) 46%, transparent 70%); filter: blur(12px); pointer-events: none; transition: opacity 1.4s ease; animation: stagePulse 3.2s ease-in-out infinite; }
+    .hero-stage.is-ready::before { opacity: 0.4; animation: none; }
+    @keyframes stagePulse { 0%,100% { opacity: 0.55; } 50% { opacity: 1; } }
+    .hero3d-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.1s ease; }
+    .hero-stage.is-ready .hero3d-canvas { opacity: 1; }
+    .hero3d-ui { position: absolute; left: 0; right: 0; bottom: 4px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; pointer-events: none; opacity: 0; transition: opacity .8s ease .5s; }
+    .hero-stage.is-ready .hero3d-ui { opacity: 1; }
+    .hero3d-cap { font-family: 'JetBrains Mono', monospace; font-size: .74rem; letter-spacing: .05em; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 4px 12px; text-align: center; padding: 0 16px; transition: opacity .26s ease, transform .26s ease; }
+    .hero3d-cap.is-swapping { opacity: 0; transform: translateY(4px); }
+    .hero3d-cap .n { color: var(--faint); }
+    .hero3d-cap .t { color: var(--gold); text-transform: uppercase; letter-spacing: .15em; }
+    .hero3d-ctrls { display: flex; align-items: center; gap: 2px; pointer-events: auto; }
+    .hero3d-dot { position: relative; width: 28px; height: 28px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+    .hero3d-dot::after { content: ""; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 4px; transform: translate(-50%, -50%); background: var(--line-2); transition: width .3s ease, background .3s ease, box-shadow .3s ease; }
+    .hero3d-dot:hover::after { background: var(--copper); }
+    .hero3d-dot.is-on::after { width: 20px; background: var(--gold); box-shadow: 0 0 10px rgba(242,205,127,0.55); }
+    .hero3d-pause { width: 30px; height: 30px; margin-left: 8px; border-radius: 50%; border: 1px solid var(--line-2); background: rgba(10,11,13,0.55); color: var(--muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color .2s, color .2s; }
+    .hero3d-pause:hover { border-color: var(--copper); color: var(--gold); }
+    .hero3d-pause svg { width: 11px; height: 11px; fill: currentColor; }
+    .hero3d-pause .i-play, .hero3d-pause.is-paused .i-pause { display: none; }
+    .hero3d-pause.is-paused .i-play { display: block; }
+    .hero3d-dot:focus-visible, .hero3d-pause:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 8px; }
+    .hero-stage.is-fallback { display: none; }
+
+    /* wide screens: copy on the left, the stage bleeds off the right edge */
+    @media (min-width: 960px) {
+      header { padding: 120px 0 96px; }
+      .hero-copy { max-width: min(590px, 52vw); }
+      .hero-copy h1 { font-size: clamp(2.7rem, 4.9vw, 4.15rem); }
+      .hero-stage { position: absolute; top: -100px; bottom: 132px; left: 50%; right: calc((100% - 100vw) / 2); }
+    }
+    /* narrow screens: the stage sits on top, full-bleed */
+    @media (max-width: 959px) {
+      header { padding: 40px 0 84px; }
+      .hero-wrap { display: flex; flex-direction: column; }
+      .hero-stage { order: -1; height: clamp(320px, 88vw, 480px); margin: -8px -28px 18px; }
+    }
+
     @media (max-width: 800px) {
       .nav-links a:not(.btn) { display: none; }
       .tl-item { padding-left: 54px; }
@@ -265,7 +313,7 @@
       .story-grid { grid-template-columns: 1fr; gap: 34px; }
       .story-media { position: static; }
       .photo-cap { display: none; }
-      header { padding: 84px 0 68px; }
+      header { padding: 22px 0 68px; }
       section { padding: 70px 0; }
       .hero-meta { grid-template-columns: 1fr; gap: 20px; }
     }
@@ -274,6 +322,7 @@
       html { scroll-behavior: auto; }
       .aurora, .eyebrow .dot, h1 .grad, .pipe-flow, .hs-cursor { animation: none; }
       #particles { display: none; }
+      .hero-stage::before { animation: none; }
     }
   </style>
 </head>
@@ -304,15 +353,36 @@
 
 <main>
 <header id="top">
-  <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> Richmond, Virginia</div>
-    <h1>I build things that help people <span class="grad">show up.</span></h1>
-    <p class="lede">I'm Jake Chaney — an IT project manager, a self-taught builder, and the founder of RVA Digital Works. I got here the long way, and I don't take a single part of it for granted.</p>
-    <div class="hero-ctas">
-      <a href="#story" class="btn btn-solid magnetic">My Story</a>
-      <a href="https://rvadigitalworks.com" class="btn btn-line magnetic" target="_blank" rel="noopener">Visit RVA Digital Works</a>
+  <div class="wrap hero-wrap">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="dot"></span> Richmond, Virginia</div>
+      <h1>I build things that help people <span class="grad">show up.</span></h1>
+      <p class="lede">I'm Jake Chaney — an IT project manager, a self-taught builder, and the founder of RVA Digital Works. I got here the long way, and I don't take a single part of it for granted.</p>
+      <div class="hero-ctas">
+        <a href="#story" class="btn btn-solid magnetic">My Story</a>
+        <a href="https://rvadigitalworks.com" class="btn btn-line magnetic" target="_blank" rel="noopener">Visit RVA Digital Works</a>
+      </div>
+      <div class="hero-status" aria-hidden="true"><span class="hs-label">currently</span> <span id="rotor" class="hs-word">IT project manager</span><span class="hs-cursor">&#9613;</span></div>
     </div>
-    <div class="hero-status" aria-hidden="true"><span class="hs-label">currently</span> <span id="rotor" class="hs-word">IT project manager</span><span class="hs-cursor">&#9613;</span></div>
+
+    <div class="hero-stage" id="hero3d">
+      <canvas class="hero3d-canvas" aria-hidden="true"></canvas>
+      <p class="sr-only">An animated 3D scene from my story: a bronze medallion marked 2009, a shipping box labeled RIC2, a laptop typing out code, and a twenty-sided die. Each one breaks apart into copper sparks and re-forms as the next.</p>
+      <div class="hero3d-ui">
+        <p class="hero3d-cap" data-hero-cap aria-hidden="true"><span class="n" data-cap-num>01 / 04</span><span class="t" data-cap-title>Clean since 2009</span><span class="s" data-cap-sub>the day it turned</span></p>
+        <div class="hero3d-ctrls" role="group" aria-label="3D animation controls">
+          <button type="button" class="hero3d-dot is-on" data-hero-dot aria-label="Show the 2009 medallion" aria-current="true"></button>
+          <button type="button" class="hero3d-dot" data-hero-dot aria-label="Show the RIC2 shipping box"></button>
+          <button type="button" class="hero3d-dot" data-hero-dot aria-label="Show the laptop"></button>
+          <button type="button" class="hero3d-dot" data-hero-dot aria-label="Show the twenty-sided die"></button>
+          <button type="button" class="hero3d-pause" data-hero-pause aria-label="Pause animation" aria-pressed="false">
+            <svg class="i-pause" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx="0.6"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="0.6"/></svg>
+            <svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.6v8.8a.6.6 0 0 0 .9.5l7-4.4a.6.6 0 0 0 0-1L3.9 1.1a.6.6 0 0 0-.9.5z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="hero-meta">
       <div><b>Project Management</b><span>complex work, on the rails</span></div>
       <div><b>Web &amp; Local SEO</b><span>founder — RVA Digital Works</span></div>
@@ -330,7 +400,7 @@
     <div class="story-grid">
       <div class="prose reveal">
         <p class="lead-line">I grew up thinking I'd be a lawyer. I got clean in a homeless shelter instead — and I wouldn't trade the road between the two.</p>
-        <p>I grew up in Highland Springs, working-class, with both parents at home. I didn't know we were poor. I was in the talented-and-gifted classes and I was certain I'd go to UVA, study law and business, and become an attorney. Life had other plans.</p>
+        <p>I grew up in Highland Springs, working-class, with both parents at home. I didn't know we were poor. I was in talented and gifted classes and I was certain I'd go to UVA, study law and business, and become an attorney. Life had other plans.</p>
         <p>For years I ran the same pattern. I'd build a life back up — a girlfriend, my license, a little money in the bank — and then I'd cross some arbitrary line I'd set for myself and decide I'd earned the right to drink and use again. It always ended in the same place: homeless at the Legacy Inn off Williamsburg Road, broke and wanting to die.</p>
         <p>The night it finally turned, I was high, watching <em>Intervention</em> on TV and wondering why my own family wasn't doing that for me. <strong>In 2009 the drug stopped working, and I got clean.</strong> It's the hardest thing I've ever done, and the thing I'm proudest of.</p>
         <p>I got sober at The Healing Place, a shelter and recovery program on Richmond's Southside. The first few weeks felt amazing — for the first time in years I could see a way out. It wasn't easy: 250 people under one roof, and not all of them were really there to get better. I was.</p>
@@ -542,7 +612,7 @@
 
 <footer>
   <div class="wrap foot-inner">
-    <div>© 2026 JAKE CHANEY · RICHMOND, VIRGINIA · UPDATED <time datetime="2026-08-26">AUG 2026</time></div>
+    <div>© 2026 JAKE CHANEY · RICHMOND, VIRGINIA · UPDATED <time datetime="2026-10-14">OCT 2026</time></div>
     <div><a href="mailto:jake@rvadigitalworks.com">EMAIL</a> · <a href="https://rvadigitalworks.com" target="_blank" rel="noopener">RVA DIGITAL WORKS</a></div>
   </div>
 </footer>
@@ -726,6 +796,7 @@
   }, 2800);
 })();
 </script>
+<script type="module" src="/js/hero3d.js"></script>
 
 </body>
 </html>
